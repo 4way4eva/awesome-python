@@ -1,3 +1,8 @@
+
+## Creative brief
+
+A production-ready brief has been added at `docs/blue-signal-creative-pack.md` to organize the Skyy Bleu / Operation TRX concept package into a usable script, audio, and visual workflow.
+
 <User: build
 
 GitHub Copilot: Failed to get a response. Please try again.
