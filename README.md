@@ -1,7 +1,6 @@
+## Security deployment baseline
 
-## Creative brief
-
-A production-ready brief has been added at `docs/blue-signal-creative-pack.md` to organize the Skyy Bleu / Operation TRX concept package into a usable script, audio, and visual workflow.
+Security and audit deployment artifacts are available in `security/` with implementation notes at `docs/security-deployment.md`.
 
 <User: build
 

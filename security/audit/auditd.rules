@@ -1,0 +1,12 @@
+# Audit security-sensitive config and deployment paths
+-w /etc/passwd -p wa -k identity
+-w /etc/group -p wa -k identity
+-w /etc/sudoers -p wa -k privilege
+-w /etc/ssh/sshd_config -p wa -k ssh
+-w /etc/nginx/nginx.conf -p wa -k nginx
+-w /etc/nginx/conf.d -p wa -k nginx
+-w /var/www -p wa -k webroot
+-w /srv/www -p wa -k webroot
+
+# Track execution of privileged account switches
+-a always,exit -F arch=b64 -S execve -F euid=0 -k rootcmd
