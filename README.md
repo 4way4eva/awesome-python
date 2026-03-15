@@ -1,3 +1,7 @@
+## Security deployment baseline
+
+Security and audit deployment artifacts are available in `security/` with implementation notes at `docs/security-deployment.md`.
+
 <User: build
 
 GitHub Copilot: Failed to get a response. Please try again.
