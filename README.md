@@ -1,3 +1,9 @@
+# README index
+
+- [Project overview](#awesome-python-hardened-docs-profile)
+
+- - -
+
 # awesome-python (hardened docs profile)
 
 This repository includes a minimal docs site plus security baseline artifacts for:
@@ -57,3 +63,4 @@ make site_preview
 - BLEU Day holiday system: `docs/bleu-day-of-thanks.md`
 
 - EV0L decoded insights: `docs/evol-codex-decoded-insights.md`
+
