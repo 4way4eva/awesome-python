@@ -1,0 +1,59 @@
+version: 1
+label: EVOLVERSE-formal-spec
+
+alphabet:
+  declared_total: 24
+  active_letters:
+    - Z
+    - Y
+    - X
+    - W
+    - V
+    - U
+    - T
+    - S
+    - R
+    - Q
+    - P
+    - O
+    - N
+    - M
+    - L
+    - K
+    - J
+    - I
+    - H
+    - G
+    - F
+    - E
+    - D
+    - C
+  sovereign_letters:
+    - B
+    - A
+
+constants:
+  gamma_calibrated: 8.142886
+  gamma_symbolic_forms:
+    - name: calibrated_literal
+      expression: "8.142886"
+    - name: calibrated_split
+      expression: "8 + 0.142886"
+
+evolclock:
+  base_shot_clock_seconds: 24
+  cycle_seconds: 2
+  release_gates_seconds_left: [12.0, 8.0, 6.0, 4.0, 3.0, 2.4, 2.0, 1.2, 1.0]
+  gate_tolerance_seconds: 0.2
+
+loot_rarity:
+  - rarity: common
+    upper_cumulative_probability: 0.60
+  - rarity: uncommon
+    upper_cumulative_probability: 0.85
+  - rarity: rare
+    upper_cumulative_probability: 0.95
+  - rarity: epic
+    upper_cumulative_probability: 0.99
+  - rarity: legendary
+    upper_cumulative_probability: 1.00

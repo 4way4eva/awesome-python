@@ -1,0 +1,69 @@
+version: 1
+metadata:
+  profile: production
+  owner: platform-security
+  description: Default-deny firewall baseline for edge and workload tiers.
+
+default_policy:
+  inbound: deny
+  outbound: deny
+  east_west: deny
+
+allow_inbound:
+  - id: in-https-public
+    protocol: tcp
+    ports: [443]
+    source_cidr: ["0.0.0.0/0"]
+    destination_tags: ["edge-gateway"]
+    reason: Public HTTPS ingress
+  - id: in-admin-vpn-ssh
+    protocol: tcp
+    ports: [22]
+    source_cidr: ["10.99.0.0/16"]
+    destination_tags: ["bastion"]
+    reason: Restricted admin access via VPN
+
+allow_outbound:
+  - id: out-dns
+    protocol: udp
+    ports: [53]
+    destination_cidr: ["10.1.0.53/32", "10.1.0.54/32"]
+    source_tags: ["workload", "edge-gateway"]
+    reason: Internal DNS only
+  - id: out-https-updates
+    protocol: tcp
+    ports: [443]
+    destination_cidr: ["0.0.0.0/0"]
+    source_tags: ["workload"]
+    reason: Package and API egress through inspected TLS path
+
+allow_east_west:
+  - id: ew-app-to-db
+    protocol: tcp
+    ports: [5432]
+    source_tags: ["app"]
+    destination_tags: ["db"]
+    reason: App to PostgreSQL only
+  - id: ew-app-to-cache
+    protocol: tcp
+    ports: [6379]
+    source_tags: ["app"]
+    destination_tags: ["cache"]
+    reason: App to Redis only
+
+controls:
+  anti_spoofing: true
+  geo_block:
+    enabled: false
+    allowed_regions: []
+  rate_limit:
+    enabled: true
+    requests_per_minute: 1200
+  ids_ips:
+    enabled: true
+    mode: prevent
+
+change_management:
+  required_approvers: 2
+  emergency_expiration_minutes: 120
+  ticket_prefix: SEC-

@@ -1,14 +1,25 @@
 site_install:
 	pip install -r requirements.txt
 
-site_link:
-	ln -sf $(CURDIR)/README.md $(CURDIR)/docs/index.md
+site_preview: site_build
+	python -m http.server 8000 --directory site
 
-site_preview: site_link
-	mkdocs serve
+site_build:
+	python scripts/build_site.py
 
-site_build: site_link
-	mkdocs build
+site_deploy:
+	@echo "Static deploy is environment-specific; publish ./site with your host."
 
-site_deploy: site_link
-	mkdocs gh-deploy --clean
+security_audit:
+	python scripts/validate_security_config.py
+
+
+codexx_demo:
+	python scripts/codexx_demo.py
+
+test:
+	python -m unittest discover -s tests
+
+
+formal_audit:
+	python scripts/codex_formal_audit.py

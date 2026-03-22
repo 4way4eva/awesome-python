@@ -1,0 +1,66 @@
+version: 1
+metadata:
+  profile: production
+  owner: security-operations
+  description: Audit configuration for access, configuration, and runtime events.
+
+audit_scopes:
+  auth:
+    enabled: true
+    include:
+      - login_success
+      - login_failure
+      - mfa_challenge
+      - token_issued
+      - privilege_escalation
+  config:
+    enabled: true
+    include:
+      - firewall_rule_change
+      - iam_policy_change
+      - secret_rotation
+      - deployment_change
+  data:
+    enabled: true
+    include:
+      - export_attempt
+      - bulk_read
+      - deletion
+      - schema_change
+  runtime:
+    enabled: true
+    include:
+      - process_spawn
+      - binary_execution
+      - network_connection
+      - container_escape_indicator
+
+retention:
+  hot_days: 30
+  warm_days: 180
+  cold_days: 365
+  immutable_storage: true
+  legal_hold_supported: true
+
+integrity:
+  log_signing: true
+  hash_chain: sha256
+  tamper_alerting: true
+
+alerting:
+  sink: siem
+  sev1_threshold:
+    failed_logins_5m: 25
+    privilege_changes_10m: 3
+    data_exports_15m: 1
+  notify:
+    - secops-oncall
+    - incident-response
+
+privacy:
+  pii_redaction: true
+  tokenize_fields:
+    - email
+    - phone
+    - ip_address
+  access_model: least_privilege
